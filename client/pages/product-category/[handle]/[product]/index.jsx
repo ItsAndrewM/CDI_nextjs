@@ -25,24 +25,21 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  // const product = await getProductById(params.product);
+  const product = await getProductById(params.product);
 
   return {
     props: {
-      // product: product || null,
+      product: product || null,
       paths: paths || null,
     },
   };
 };
 
-const Page = ({
-  // product,
-  paths,
-}) => {
+const Page = ({ product, paths }) => {
   const router = useRouter();
   return (
     <>
-      {/* <Head>
+      <Head>
         <title>{`CDI Furlers | ${product ? product.name : null}`}</title>
         <meta
           name="description"
@@ -88,10 +85,8 @@ const Page = ({
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
-      </Head> */}
-      <Layout>
-        {/* {!product ? null : <ProductPage product={product} />} */}
-      </Layout>
+      </Head>
+      <Layout>{!product ? null : <ProductPage product={product} />}</Layout>
     </>
   );
 };
