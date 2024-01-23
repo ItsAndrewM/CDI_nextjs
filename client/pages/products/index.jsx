@@ -18,9 +18,11 @@ export const getServerSideProps = async (context) => {
 
   return {
     props: {
-      products: products.products || null,
-      pagesTotal: products.total_pages || null,
-      categoriesWithChildren: categoriesWithChildren || null,
+      products: products ? products.products : null,
+      pagesTotal: products ? products.total_pages : null,
+      categoriesWithChildren: categoriesWithChildren
+        ? categoriesWithChildren
+        : null,
     },
   };
 };
