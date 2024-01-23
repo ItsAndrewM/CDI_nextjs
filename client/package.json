@@ -36,7 +36,7 @@
     "wpapi": "^1.2.2"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.16",
+    "autoprefixer": "^10.4.17",
     "eslint": "^8",
     "eslint-config-next": "14.0.2",
     "postcss": "^8.4.33",
