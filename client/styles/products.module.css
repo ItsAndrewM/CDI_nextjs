@@ -1,0 +1,46 @@
+.load {
+  height: 50px;
+  width: 200px;
+  background-color: blue;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list {
+  list-style: none;
+  width: 100%;
+  display: grid;
+  grid-row-gap: 2em;
+  grid-template-columns: repeat(4, minmax(25%, auto));
+  justify-items: center;
+  justify-content: space-between;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.aside {
+  position: fixed;
+  top: 0;
+}
