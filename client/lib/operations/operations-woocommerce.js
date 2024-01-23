@@ -54,7 +54,6 @@ export const getCategories = async () => {
         : process.env.NEXT_PUBLIC_PUBLIC_URL
     }/api/wc/store/products/product-categories`
   );
-  console.log(categories);
   const categories = await data.json();
   return categories.data;
 };
@@ -73,7 +72,9 @@ export const formatCategoriesWithChildren = async () => {
 
 export const getCategoryPaths = async () => {
   const categories = await getCategories();
-  return categories.map((category) => category.slug);
+  if (categories) {
+    return categories.map((category) => category.slug);
+  }
 };
 
 export const getCategoryId = async (slug) => {
@@ -104,13 +105,18 @@ export const getProductByCategoryId = async (id) => {
 export const getProductPath = async () => {
   const paths = [];
   const categories = await getCategories();
-  for (const category of categories) {
-    const products = await getProductByCategoryId(category.id);
-    for (const product of products) {
-      paths.push(`${category.slug}/${product.slug}`);
+  if (categories) {
+    for (const category of categories) {
+      const products = await getProductByCategoryId(category.id);
+      if (products) {
+        for (const product of products) {
+          paths.push(`${category.slug}/${product.slug}`);
+        }
+      }
     }
+    console.log(paths);
+    return paths;
   }
-  return paths;
 };
 
 export const getProductById = async (id) => {

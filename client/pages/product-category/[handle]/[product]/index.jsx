@@ -23,7 +23,6 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  console.log(params);
   const product = await getProductById(params.product);
   return {
     props: {
