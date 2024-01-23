@@ -72,11 +72,13 @@ const Page = ({ products, pagesTotal, categoriesWithChildren }) => {
       </Head>
       <Layout>
         {/* <SortBy /> */}
-        <ProductLayout
-          products={products}
-          categoriesWithChildren={categoriesWithChildren}
-          pages={pages}
-        />
+        {!products || !categoriesWithChildren || !pages ? null : (
+          <ProductLayout
+            products={products}
+            categoriesWithChildren={categoriesWithChildren}
+            pages={pages}
+          />
+        )}
       </Layout>
     </>
   );
