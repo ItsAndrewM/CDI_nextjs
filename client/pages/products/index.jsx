@@ -14,13 +14,12 @@ import Head from "next/head";
 
 export const getServerSideProps = async (context) => {
   const products = await getProducts(context.query);
-  const pagesTotal = products.total_pages;
   const categoriesWithChildren = await formatCategoriesWithChildren();
 
   return {
     props: {
       products: products.products || null,
-      pagesTotal: pagesTotal || null,
+      pagesTotal: products.total_pages || null,
       categoriesWithChildren: categoriesWithChildren || null,
     },
   };
