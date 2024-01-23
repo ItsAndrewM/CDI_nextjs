@@ -5,6 +5,6 @@ module.exports = {
     tailwindcss: {
       config: join(__dirname, "tailwind.config.js"),
     },
-    autoprefixer: {},
+    autoprefixer: { browsers: ["last 10 versions"] },
   },
 };

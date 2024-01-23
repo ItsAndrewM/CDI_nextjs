@@ -4,26 +4,8 @@ import { CartContext } from "@/lib/context/cartContext";
 import Layout from "@/components/ui/layout/layout";
 import { HomePage } from "@/components/component/home-page";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/lib/helpers";
-import {
-  getCartByKey,
-  getCoCart,
-  getCoCartIndex,
-  getProductByIdCoCart,
-  getProducts,
-  getProductsCoCart,
-} from "@/lib/operations/operations-woocommerce";
-
-// export const getStaticProps = async ({ params }) => {
-//   const index = await getCoCartIndex();
-//   return {
-//     props: {
-//       index: index || null,
-//     },
-//   };
-// };
 
 export default function Home({}) {
-  const { cart } = useContext(CartContext);
   return (
     <>
       <Head>
