@@ -1,12 +1,6 @@
-import { PaginationBar } from "@/components/component/paginationBar";
 import Aside from "@/components/ui/products/aside";
-import { SITE_DESCRIPTION, removeCharsFromName } from "@/lib/helpers";
-import usePagination from "@/lib/hooks/usePagination";
-import styles from "@/styles/products.module.css";
+import { SITE_DESCRIPTION } from "@/lib/helpers";
 import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState } from "react";
 
 const ProductLayout = ({ categories, children, categoriesWithChildren }) => {
   const product_page_title = "CDI Furlers | Products";
