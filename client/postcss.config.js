@@ -8,5 +8,6 @@ module.exports = {
     autoprefixer: {
       // browsers: ["last 10 versions"]
     },
+    ...(process.env.NODE_ENV === "production" ? { cssnano: {} } : {}),
   },
 };
