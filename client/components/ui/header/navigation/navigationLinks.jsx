@@ -106,7 +106,7 @@ const NavigationLinks = () => {
                     {menuItem.submenu.map((sub) => {
                       return (
                         <NavigationMenuLink asChild key={sub.title}>
-                          <Link className="block px-4 py-2" href="#">
+                          <Link className="block px-4 py-2" href={sub.url}>
                             {sub.title}
                           </Link>
                         </NavigationMenuLink>
