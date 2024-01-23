@@ -17,6 +17,13 @@ module.exports = {
   presets: [],
   darkMode: "media", // or 'class'
   theme: {
+    extend: {
+      colors: {
+        cdiBlue: "#145DA0",
+        cdiLightBlue: "#B1D4E0",
+        cdiDarkBlue: "#051D40",
+      },
+    },
     accentColor: ({ theme }) => ({
       ...theme("colors"),
       auto: "auto",
@@ -176,9 +183,6 @@ module.exports = {
       fuchsia: colors.fuchsia,
       pink: colors.pink,
       rose: colors.rose,
-      cdiBlue: "#145DA0",
-      cdiLightBlue: "#B1D4E0",
-      cdiDarkBlue: "#051D40",
     }),
     columns: {
       auto: "auto",
