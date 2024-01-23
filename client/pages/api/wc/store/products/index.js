@@ -15,15 +15,15 @@ export const getProductsByClient = async (query) => {
   const order = orderBy ? orderBy.split("-")[1] : "asc";
   const orderByField = orderBy ? orderBy.split("-")[0] : "title";
   return await WooCommerce.get(
-    `products?per_page=${PER_PAGE}&page=${
-      page ? page : 1
-    }&order=${order}&orderby=${orderByField}&status=publish&min_price=${
-      min_price ? min_price : "0"
-    }&max_price=${max_price ? max_price : "200000"}&shipping_class=${
-      shipping_class ? shipping_class : ""
-    }&category=${category ? category : ""}&search=${search ? search : ""}&tag=${
-      tag ? tag : ""
-    }`
+    `products?per_page=${PER_PAGE}&page=${page ? page : 1}&order=${
+      order ? order : "asc"
+    }&orderby=${
+      orderByField ? orderByField : "title"
+    }&status=publish&min_price=${min_price ? min_price : "0"}&max_price=${
+      max_price ? max_price : "200000"
+    }&shipping_class=${shipping_class ? shipping_class : ""}&category=${
+      category ? category : ""
+    }&search=${search ? search : ""}&tag=${tag ? tag : ""}`
   )
     .then((res) => {
       const total_pages = res.headers["x-wp-totalpages"];
