@@ -11,48 +11,57 @@ import {
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { categoryPaths } from "@/data/paths/categoryPaths";
 
 export const getStaticPaths = async () => {
-  const paths = await getCategoryPaths();
+  // const paths = await getCategoryPaths();
   return {
-    paths: paths.map((path) => `/product-category/${path}`) ?? [],
+    paths: categoryPaths.map((path) => `/product-category/${path}`) ?? [],
     fallback: "blocking",
   };
 };
 
 export const getStaticProps = async ({ params }) => {
-  const id = await getCategoryId(params.handle);
-  const category = await getCategoryById(id);
-  const categoriesWithChildren = await formatCategoriesWithChildren();
+  // const id = await getCategoryId(params.handle);
+  // const category = await getCategoryById(id);
+  // const categoriesWithChildren = await formatCategoriesWithChildren();
+  // const paths = await getCategoryPaths();
   return {
     props: {
-      category: category.category || null,
-      products: category.products || null,
-      categoriesWithChildren: categoriesWithChildren || null,
-      pagesTotal: category.total_pages || null,
+      // category: category.category || null,
+      // products: category.products || null,
+      // categoriesWithChildren: categoriesWithChildren || null,
+      // pagesTotal: category.total_pages || null,
+      paths: ["paths"] || null,
     },
   };
 };
 
-const Page = ({ category, products, categoriesWithChildren, pagesTotal }) => {
+const Page = ({
+  // category,
+  // products,
+  // categoriesWithChildren,
+  // pagesTotal,
+  paths,
+}) => {
   const router = useRouter();
   const [pages, setPages] = useState([1]);
-
-  try {
-    usePagination(
-      router.query.page ? Number(router.query.page) : 1,
-      pagesTotal
-    ).then((data) => {
-      if (pages.length !== data.length) {
-        setPages(data);
-      }
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  console.log(paths);
+  // try {
+  //   usePagination(
+  //     router.query.page ? Number(router.query.page) : 1,
+  //     pagesTotal
+  //   ).then((data) => {
+  //     if (pages.length !== data.length) {
+  //       setPages(data);
+  //     }
+  //   });
+  // } catch (error) {
+  //   console.log(error);
+  // }
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{`CDI Furlers | ${category ? category.name : null}`}</title>
         <meta
           name="description"
@@ -98,14 +107,16 @@ const Page = ({ category, products, categoriesWithChildren, pagesTotal }) => {
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
-      </Head>
+      </Head> */}
       <Layout>
-        <ProductLayout
-          products={products}
-          categoriesWithChildren={categoriesWithChildren}
-          pages={pages}
-          title={category.name}
-        />
+        {/* {!products || !categoriesWithChildren || !pages || !category ? null : (
+          <ProductLayout
+            products={products}
+            categoriesWithChildren={categoriesWithChildren}
+            pages={pages}
+            title={category.name}
+          />
+        )} */}
       </Layout>
     </>
   );

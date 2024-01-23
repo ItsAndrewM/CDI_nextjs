@@ -119,6 +119,23 @@ export const getProductPath = async () => {
   }
 };
 
+export const getProductPaths = async () => {
+  const paths = [];
+  const products = await getProducts({ page: 1 });
+  if (products) {
+    const total_pages = products.total_pages;
+    for (let page = 1; page <= total_pages; page++) {
+      const products = await getProducts({ page });
+      if (products) {
+        for (const product of products.products) {
+          paths.push(`${product.categories[0].slug}/${product.slug}`);
+        }
+      }
+    }
+    return paths;
+  }
+};
+
 export const getProductById = async (id) => {
   const data = await fetch(
     process.env.NODE_ENV === "development"

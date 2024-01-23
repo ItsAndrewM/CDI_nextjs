@@ -35,7 +35,7 @@ const ProductLayout = ({ categories, children, categoriesWithChildren }) => {
         key="1"
         className="md:grid md:grid-cols-[240px_1fr] flex items-start justify-center px-4 mx-auto py-6 flex"
       >
-        <Aside categoriesWithChildren={categoriesWithChildren} />
+        {/* <Aside categoriesWithChildren={categoriesWithChildren} /> */}
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {children}
         </main>

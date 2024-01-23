@@ -4,7 +4,10 @@ const getProductId = async (slug) => {
   )
     .then((response) => response.json())
     .then((data) => {
-      return data;
+      return { id: data.id, prices: data.prices };
+    })
+    .catch((error) => {
+      return error;
     });
 };
 
@@ -41,6 +44,7 @@ const handler = async (req, res) => {
   }
   try {
     const id = await getProductId(req.query.id);
+    console.log(id);
     const response = await getProduct(id.id);
     response.variations
       ? (response.variations = await getProductVariations(response.id))

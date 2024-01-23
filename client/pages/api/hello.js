@@ -91,14 +91,14 @@ const getShippingClassById = async (id) => {
 const handler = async (req, res) => {
   if (req.method != "GET")
     return res.status(404).json({ success: false, message: "Not Found" });
-  if (!req.query) {
-    return res.status(400).json({
-      success: false,
-      message: "Please Provide offset number",
-    });
-  }
+  // if (!req.query) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: "Please Provide offset number",
+  //   });
+  // }
   try {
-    const response = await getShippingClasses();
+    const response = await getProductWithoutIdButSlug();
     //64
     if (!response) {
       console.log("RES: ", response);

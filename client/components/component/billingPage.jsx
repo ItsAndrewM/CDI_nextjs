@@ -29,7 +29,6 @@ export function BillingPage() {
   const { orderId, cart } = useContext(CartContext);
   const router = useRouter();
   const [countryCode, setCountryCode] = useState(null);
-  console.log(cart.shipping);
   const handleShippingSubmit = async (e) => {
     e.preventDefault();
     if (sameShippingAddress) {

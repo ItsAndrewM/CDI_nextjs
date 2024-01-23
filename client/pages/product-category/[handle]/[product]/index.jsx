@@ -7,35 +7,42 @@ import {
 import {
   getProductById,
   getProductPath,
+  getProductPaths,
 } from "@/lib/operations/operations-woocommerce";
 import { useAddItemToCart } from "@/lib/hooks/useAddItemToCart";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { ProductPage } from "@/components/component/product-page";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { paths } from "@/data/paths/paths";
 
 export const getStaticPaths = async () => {
-  const paths = await getProductPath();
+  // const paths = await getProductPaths();
   return {
-    paths: paths.map((path) => `/product-category/${path}`) ?? [],
+    paths: paths?.map((path) => `/product-category/${path}`) ?? [],
     fallback: "blocking",
   };
 };
 
 export const getStaticProps = async ({ params }) => {
-  const product = await getProductById(params.product);
+  // const product = await getProductById(params.product);
+
   return {
     props: {
-      product: product || null,
+      // product: product || null,
+      paths: paths || null,
     },
   };
 };
 
-const Page = ({ product }) => {
+const Page = ({
+  // product,
+  paths,
+}) => {
   const router = useRouter();
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{`CDI Furlers | ${product ? product.name : null}`}</title>
         <meta
           name="description"
@@ -81,9 +88,9 @@ const Page = ({ product }) => {
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
-      </Head>
+      </Head> */}
       <Layout>
-        <ProductPage product={product} />
+        {/* {!product ? null : <ProductPage product={product} />} */}
       </Layout>
     </>
   );
