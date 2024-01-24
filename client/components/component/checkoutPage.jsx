@@ -43,7 +43,6 @@ export function CheckoutPage() {
         acc[key] = formData.get(key);
         return acc;
       }, {});
-      console.log(data);
       try {
         console.log("trying");
         const response = await addShippingToOrder(orderId, data);

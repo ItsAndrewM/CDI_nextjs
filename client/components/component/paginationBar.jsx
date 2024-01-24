@@ -13,7 +13,6 @@ import { useRouter } from "next/router";
 
 export function PaginationBar({ pages }) {
   const router = useRouter();
-  console.log(router);
   return (
     <div className="w-full flex items-center justify-center space-x-4">
       <Pagination>

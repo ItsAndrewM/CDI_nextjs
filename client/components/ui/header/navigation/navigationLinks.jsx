@@ -18,7 +18,6 @@ import SearchBox from "../../searchBox/searchBox";
 const NavigationLinks = () => {
   const dialogRef = useRef();
   const handleDialog = () => {
-    console.log(dialogRef.current.open);
     if (dialogRef.current.open) {
       dialogRef.current.close();
     } else {

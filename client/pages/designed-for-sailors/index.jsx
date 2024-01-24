@@ -1,7 +1,7 @@
-import DesignedForSailors from "@/components/ui/designedForSailors/designedForSailors";
 import Layout from "@/components/ui/layout/layout";
 import { SITE_DESCRIPTION } from "@/lib/helpers";
 import Head from "next/head";
+import DesignedForSailors from "@/components/ui/designedForSailors/designedForSailors";
 
 const Page = () => {
   return (

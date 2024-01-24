@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { searchProducts } from "@/lib/operations/operations-woocommerce";
 import { Button } from "../button";
+import Image from "next/image";
 
 const SearchBox = () => {
   const router = useRouter();
@@ -47,14 +48,13 @@ const SearchBox = () => {
         <div className="absolute w-full mt-1 rounded-md bg-white shadow-lg ">
           <ul className="divide-y divide-gray-200 ">
             {searchResults.map((product, index) => {
-              console.log(product);
               return (
                 <li className="p-4 flex items-center gap-4" key={index}>
                   <Link
                     href={`/product-category/${product.categories[0].slug}/${product.slug}`}
                     className="flex items-center gap-4 hover:bg-gray-100  rounded transition-colors duration-200 ease-in-out w-full p-2"
                   >
-                    <img
+                    <Image
                       alt={product.name}
                       className="w-12 h-12 object-cover rounded"
                       height="50"
@@ -71,9 +71,6 @@ const SearchBox = () => {
                     />
                     <div>
                       <h4 className="text-sm font-medium">{product.name}</h4>
-                      {/* <p className="text-sm text-gray-500 ">
-                        {product.price_html}
-                      </p> */}
                       <div
                         className="text-sm font-medium"
                         dangerouslySetInnerHTML={{ __html: product.price_html }}

@@ -77,7 +77,6 @@ export function BillingPage() {
           }
           return acc;
         }, {});
-        console.log(data);
         try {
           const response = await addShippingToOrder(orderId, data);
           // await swell.init(swellConfig.storeId, swellConfig.publicKey);

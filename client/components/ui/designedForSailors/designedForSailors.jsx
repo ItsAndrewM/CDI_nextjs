@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ContactBanner } from "@/components/component/contact-banner";
-import { Button } from "../Button";
+import { Button } from "../button";
 import { Input } from "../input";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,7 +25,6 @@ const DesignedForSailors = () => {
         acc[key] = formData.get(key);
         return acc;
       }, {});
-      console.log(data);
       try {
         const response = await fetch("/contact", {
           method: "POST",

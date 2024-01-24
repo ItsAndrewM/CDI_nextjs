@@ -34,14 +34,11 @@ const CartCard = ({ product }) => {
       product.product_id,
       product.variation_id
     );
-    console.log(newCart);
     if (newCart) {
       setCart(newCart);
       setLoading(false);
     }
   };
-
-  console.log(product);
 
   return (
     <div className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 ">

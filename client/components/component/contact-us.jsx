@@ -36,7 +36,6 @@ export function ContactUs() {
         acc[key] = formData.get(key);
         return acc;
       }, {});
-      console.log(data);
       try {
         const response = await fetch("/contact-us", {
           method: "POST",
@@ -74,8 +73,8 @@ export function ContactUs() {
         <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold">Contact Us</h1>
           <p className="text-gray-500 ">
-            We're here to help and answer any question you might have. We look
-            forward to hearing from you.
+            We&apos;re here to help and answer any question you might have. We
+            look forward to hearing from you.
           </p>
         </div>
         <div className="grid gap-4 w-full max-w-2xl lg:grid-cols-3">

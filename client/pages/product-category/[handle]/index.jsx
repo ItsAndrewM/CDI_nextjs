@@ -46,7 +46,6 @@ const Page = ({
 }) => {
   const router = useRouter();
   const [pages, setPages] = useState([1]);
-  console.log(paths);
   try {
     usePagination(
       router.query.page ? Number(router.query.page) : 1,

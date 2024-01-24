@@ -24,7 +24,6 @@ import Link from "next/link";
 import { removeCharsFromName } from "@/lib/helpers";
 
 export function CategoryPage({ categories, pages }) {
-  console.log(pages);
   const router = useRouter();
   return (
     <section key="1" className="w-full md:py-24 flex justify-center">

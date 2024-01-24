@@ -6,16 +6,6 @@ import { HomePage } from "@/components/component/home-page";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/lib/helpers";
 import { getProductPaths } from "@/lib/operations/operations-woocommerce";
 
-export const getServerSideProps = async () => {
-  const products = await getProductPaths();
-  console.log(products);
-  return {
-    props: {
-      products: [],
-    },
-  };
-};
-
 export default function Home({}) {
   return (
     <>

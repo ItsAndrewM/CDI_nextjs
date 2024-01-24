@@ -44,7 +44,6 @@ const Page = ({ categories, pagesTotal }) => {
     console.log(error);
   }
 
-  console.log(pages);
   const product_page_title = "CDI Furlers | Product Categories";
   return (
     <>
