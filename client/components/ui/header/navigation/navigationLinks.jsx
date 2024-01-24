@@ -13,6 +13,7 @@ import {
   NavigationMenu,
   NavigationMenuSub,
 } from "../../navigation-menu";
+import SearchBox from "../../searchBox/searchBox";
 
 const NavigationLinks = () => {
   const dialogRef = useRef();
@@ -26,65 +27,9 @@ const NavigationLinks = () => {
   };
   return (
     <div className="w-full flex items-center justify-center ">
-      {/* <nav
-        aria-label="Main navigation"
-        className="w-full flex items-center justify-between"
-      > */}
-      {/* <ul className="flex w-full space-x-4 items-center justify-between">
-          {menuItems.map((menuItem, index) => {
-            return !menuItem.submenu.length ? (
-              <li key={index + menuItem.title}>
-                <Link
-                  className="text-blue-600 hover:text-blue-800"
-                  href={menuItem.url}
-                >
-                  {menuItem.title}
-                </Link>
-              </li>
-            ) : (
-              <li className="relative group" key={index + menuItem.title}>
-                <Link
-                  className="text-blue-600 hover:text-blue-800 flex items-center "
-                  href={menuItem.url}
-                >
-                  {menuItem.title}
-                  <ChevronDownIcon className="ml-1 w-4 h-4" />
-                </Link>
-                <div className="absolute left-0 mt-1 hidden group-hover:block bg-white shadow-lg z-10">
-                  <ul className="py-1">
-                    {menuItem.submenu.map((subMenuItem, index) => {
-                      return (
-                        <li key={index}>
-                          <Link
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            href={subMenuItem.url}
-                          >
-                            {subMenuItem.title}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </li>
-            );
-          })}
-          <li>
-            <div className="flex items-center space-x-4 hover:text-blue-600 transition-colors duration-200">
-              <Link href={"/"}>
-                <SearchIcon className="w-6 h-6 text-gray-600 hover:text-blue-600 transition-colors duration-200" />
-              </Link>
-              <Button
-                className="bg-inhereit hover:bg-inhereit"
-                onClick={handleDialog}
-              >
-                <ShoppingCartIcon className="w-6 h-6 text-gray-600 hover:text-blue-600 transition-colors duration-200" />
-              </Button>
-            </div>
-          </li>
-        </ul> */}
-      <NavigationMenu className="hidden lg:flex lg:justify-between lg:items-center lg:w-full">
-        <NavigationMenuList>
+      <NavigationMenu className="hidden lg:flex lg:justify-between lg:items-center lg:w-full  [&>div]:w-full">
+        <NavigationMenuList className="w-full ">
+          {/* <ul className="flex w-full space-x-4 items-center justify-between"> */}
           {menuItems.map((menuItem, index) => {
             if (!menuItem.submenu.length) {
               return (
@@ -117,6 +62,9 @@ const NavigationLinks = () => {
               );
             }
           })}
+          <NavigationMenuItem className="w-full max-w-sm">
+            <SearchBox />
+          </NavigationMenuItem>
           <NavigationMenuItem>
             <Button
               className="bg-inhereit hover:bg-inhereit"
@@ -127,7 +75,6 @@ const NavigationLinks = () => {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      {/* </nav> */}
       <CartSidebar dialogRef={dialogRef} />
     </div>
   );

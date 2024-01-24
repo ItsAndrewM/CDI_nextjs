@@ -1,14 +1,11 @@
-const getSearchProducts = async (searchTerm) => {
-  return await fetch(
-    `${process.env.PUBLIC_URL}/wp-json/wc/store/v1/products?search=${searchTerm}`,
-    {
-      headers: {
-        Authorization: `Basic ${process.env.WP_BASIC_AUTH}`,
-      },
-    }
+import { WooCommerce } from "../../reports";
+
+const getSearchProducts = async (search) => {
+  return await WooCommerce.get(
+    `products?search=${search}&status=publish&order=asc&orderby=title&per_page=100`
   )
-    .then((response) => response.json())
-    .then((data) => data);
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
 };
 
 const handler = async (req, res) => {
@@ -20,6 +17,7 @@ const handler = async (req, res) => {
       message: "Please Provide search term",
     });
   }
+  console.log("REQ: ", req.query.search);
   try {
     const response = await getSearchProducts(req.query.search);
     if (!response) {

@@ -25,6 +25,8 @@ import { useContext } from "react";
 import { CartContext } from "@/lib/context/cartContext";
 import { Button } from "../ui/button";
 import Filters from "../ui/filters";
+import SearchBox from "../ui/searchBox/searchBox";
+import SearchBoxProductLayout from "../ui/searchBox/searchBoxProductLayout";
 
 export function ProductLayout({
   products,
@@ -125,6 +127,7 @@ export function ProductLayout({
         </div>
         <div className="md:col-span-3">
           <div className="flex justify-end items-center pb-4 gap-4">
+            <SearchBoxProductLayout />
             <Select
               className="border-0 z-10"
               onValueChange={(value) =>

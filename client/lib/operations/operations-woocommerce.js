@@ -189,7 +189,12 @@ export const searchProducts = async (searchTerm) => {
       : `${process.env.NEXT_PUBLIC_PUBLIC_URL}/api/wc/store/products/search/${searchTerm}`
   );
   const products = await data.json();
-  return products.data;
+  const filtered = products.data.filter(
+    (product) =>
+      product.slug.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  return filtered;
 };
 
 export const getTotalProducts = async () => {
