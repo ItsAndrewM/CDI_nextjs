@@ -159,7 +159,7 @@ export function ContactUs() {
       <dialog
         className="absolute mx-auto right-0 left-0 top-0 z-50 w-80 backdrop:bg-grey-600 "
         ref={ref}
-        open={true}
+        open={false}
       >
         <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
           <h2 className="text-2xl font-bold mb-4">

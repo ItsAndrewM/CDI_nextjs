@@ -4,12 +4,13 @@
  */
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export function MeetTheTeam() {
   return (
     <div key="1" className="flex flex-col items-center justify-center p-6">
-      <section className="w-full bg-white py-12 px-6 mb-12 rounded-lg shadow-md">
-        <div className="flex flex-col md:flex-col items-center justify-between">
+      <section className="w-full bg-white py-12 px-6 mb-12 rounded-lg shadow-md max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-col items-center justify-between max-w-5xl w-full mx-auto">
           <div className="md:w-full text-center">
             <h1 className="text-4xl font-bold mb-4">
               Welcome to CDIfurlers.com
@@ -21,7 +22,12 @@ export function MeetTheTeam() {
               committed to delivering high-quality products and exceptional
               service.
             </p>
-            <Button className="mb-4 md:mb-0">Join Our Team</Button>
+            <Link
+              className="mb-4 md:mb-0 bg-cdiBlue text-white px-4 py-2 rounded-md hover:bg-cdiLightBlue hover:text-black transition-colors duration-200 ease-in-out"
+              href={"mailto:info@cdifurlers.com"}
+            >
+              Join Our Team
+            </Link>
           </div>
           <div className="flex md:w-full justify-center mt-6 md:mt-0">
             <Image
@@ -50,18 +56,18 @@ export function MeetTheTeam() {
         </div>
       </section>
       <h1 className="text-3xl font-bold mb-6">Meet the Team</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-fill mx-auto max-w-7xl">
         <div className="bg-gray-100 rounded-lg shadow-md p-6 flex flex-col items-center justify-center space-y-4">
           <Image
             alt="Team member 1"
-            className="h-40 w-40 rounded-full mx-auto"
-            height="250"
+            className="h-48 w-48 rounded-full mx-auto"
+            height="192"
             src="/images/team/darryl.jpg"
             style={{
-              aspectRatio: "250/250",
+              aspectRatio: "192/192",
               objectFit: "cover",
             }}
-            width="250"
+            width="192"
           />
           <h2 className="text-xl font-bold text-center mt-4">Darryl Hodgson</h2>
           {/* <p className="text-center text-gray-500">Software Engineer</p> */}
@@ -73,22 +79,27 @@ export function MeetTheTeam() {
             marine industry, building on his passion for helping everyone that
             he can to share in his enthusiasm for being on the water.
           </p>
-          <Button className="mt-4 mx-auto">Contact John</Button>
+          <Link
+            className="mb-4 md:mb-0 bg-cdiBlue text-white px-4 py-2 rounded-md hover:bg-cdiLightBlue hover:text-black transition-colors duration-200 ease-in-out"
+            href={"mailto:darrylhodgson@precisionsailloft.com"}
+          >
+            Contact Darryl
+          </Link>
         </div>
         <div className="bg-gray-100 rounded-lg shadow-md p-6 flex flex-col items-center justify-center space-y-4">
           <Image
             alt="Team member 1"
-            className="h-40 w-40 rounded-full mx-auto"
-            height="250"
-            src="/images/team/darryl.jpg"
+            className="h-48 w-48 rounded-full mx-auto"
+            height="192"
+            src="/images/team/ron.jpg"
             style={{
-              aspectRatio: "250/250",
+              aspectRatio: "192/192",
               objectFit: "cover",
             }}
-            width="250"
+            width="192"
           />
           <h2 className="text-xl font-bold text-center mt-4">Ron McInnis</h2>
-          {/* <p className="text-center text-gray-500">Product Manager</p> */}
+          {/* <p className="text-center text-gray-500">Software Engineer</p> */}
           <p className="text-center text-gray-600 mt-2 ">
             Ron grew up in Ontario, Canada where he spent summers on Lake Erie,
             Lake Huron and Lake Ontario windsurfing, sailing on Hobie Cats and
@@ -99,74 +110,89 @@ export function MeetTheTeam() {
             CDIFurlers.com to bring you exceptional, informative, customer
             focused services.
           </p>
-          <Button className="mt-4 mx-auto">Contact Jane</Button>
+          <Link
+            className="mb-4 md:mb-0 bg-cdiBlue text-white px-4 py-2 rounded-md hover:bg-cdiLightBlue hover:text-black transition-colors duration-200 ease-in-out"
+            href={"mailto:info@cdifurlers.com"}
+          >
+            Contact Ron
+          </Link>
         </div>
         <div className="bg-gray-100 rounded-lg shadow-md p-6 flex flex-col items-center justify-center space-y-4">
           <Image
             alt="Team member 1"
-            className="h-40 w-40 rounded-full mx-auto"
-            height="250"
-            src="/images/team/darryl.jpg"
+            className="h-48 w-48 rounded-full mx-auto"
+            height="192"
+            src="/images/team/dre.jpg"
             style={{
-              aspectRatio: "250/250",
+              aspectRatio: "192/192",
               objectFit: "cover",
             }}
-            width="250"
+            width="192"
           />
           <h2 className="text-xl font-bold text-center mt-4">
             Andreas Zobolas
           </h2>
-          {/* <p className="text-center text-gray-500">UX Designer</p> */}
+          {/* <p className="text-center text-gray-500">Software Engineer</p> */}
           <p className="text-center text-gray-600 mt-2 ">
             Andreas is the Design Director for a large sail loft. He has nearly
             a decade of sail design experience and is our in house expert for
-            all our questions about sails. Originally from Greece, Andreas’
+            all our questions about sails. Originally from Greece, Andreas&apos;
             family moved to Sidney, British Columbia when he was young. After
             graduating from culinary school and studying graphic design, he took
             over his family business. When presented with the opportunity for a
             change he began designing sails and has not looked back.
           </p>
-          <Button className="mt-4 mx-auto">Contact Alice</Button>
+          <Link
+            className="mb-4 md:mb-0 bg-cdiBlue text-white px-4 py-2 rounded-md hover:bg-cdiLightBlue hover:text-black transition-colors duration-200 ease-in-out"
+            href={"mailto:info@cdiFurlers.com"}
+          >
+            Contact Dre
+          </Link>
         </div>
         <div className="bg-gray-100 rounded-lg shadow-md p-6 flex flex-col items-center justify-center space-y-4">
           <Image
             alt="Team member 1"
-            className="h-40 w-40 rounded-full mx-auto"
-            height="250"
-            src="/images/team/darryl.jpg"
+            className="h-48 w-48 rounded-full mx-auto"
+            height="192"
+            src="/images/team/laura.jpg"
             style={{
-              aspectRatio: "250/250",
+              aspectRatio: "192/192",
               objectFit: "cover",
             }}
-            width="250"
+            width="192"
           />
           <h2 className="text-xl font-bold text-center mt-4">
             Laura Pettinger
           </h2>
-          {/* <p className="text-center text-gray-500">UX Designer</p> */}
+          {/* <p className="text-center text-gray-500">Software Engineer</p> */}
           <p className="text-center text-gray-600 mt-2 ">
             Born and raised on Vancouver Island, Laura grew up right next to the
-            Pacific ocean and hasn’t left. Laura has been working in customer
-            service for 4 years and is just as excited to help out customers as
-            she is to be a part of the CDI Furler team. Laura will be supporting
-            customers with their shipping and logistic needs.
+            Pacific ocean and hasn&apos;t left. Laura has been working in
+            customer service for 4 years and is just as excited to help out
+            customers as she is to be a part of the CDI Furler team. Laura will
+            be supporting customers with their shipping and logistic needs.
           </p>
-          <Button className="mt-4 mx-auto">Contact Alice</Button>
+          <Link
+            className="mb-4 md:mb-0 bg-cdiBlue text-white px-4 py-2 rounded-md hover:bg-cdiLightBlue hover:text-black transition-colors duration-200 ease-in-out"
+            href={"mailto:info@cdifurlers.com"}
+          >
+            Contact Laura
+          </Link>
         </div>
         <div className="bg-gray-100 rounded-lg shadow-md p-6 flex flex-col items-center justify-center space-y-4">
           <Image
             alt="Team member 1"
-            className="h-40 w-40 rounded-full mx-auto"
-            height="250"
-            src="/images/team/darryl.jpg"
+            className="h-48 w-48 rounded-full mx-auto"
+            height="192"
+            src="/images/team/trevor.jpg"
             style={{
-              aspectRatio: "250/250",
+              aspectRatio: "192/192",
               objectFit: "cover",
             }}
-            width="250"
+            width="192"
           />
           <h2 className="text-xl font-bold text-center mt-4">Trevor Parks</h2>
-          {/* <p className="text-center text-gray-500">UX Designer</p> */}
+          {/* <p className="text-center text-gray-500">Software Engineer</p> */}
           <p className="text-center text-gray-600 mt-2 ">
             Trevor grew up on Vancouver Island, British Columbia. He started his
             career in a big box retail environment, eventually becoming the
@@ -177,7 +203,12 @@ export function MeetTheTeam() {
             any questions so you can feel confident in your decision to purchase
             with us.
           </p>
-          <Button className="mt-4 mx-auto">Contact Alice</Button>
+          <Link
+            className="mb-4 md:mb-0 bg-cdiBlue text-white px-4 py-2 rounded-md hover:bg-cdiLightBlue hover:text-black transition-colors duration-200 ease-in-out"
+            href={"mailto:trevorparks@precisionsailloft.com"}
+          >
+            Contact Trevor
+          </Link>
         </div>
       </div>
     </div>
