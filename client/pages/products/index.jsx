@@ -71,6 +71,9 @@ const Page = ({ products, pagesTotal, categoriesWithChildren }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
       </Head>
+      <h1 className="bg-black text-white">
+        if this works then its the fucking compoenents
+      </h1>
       <Layout>
         {/* <SortBy /> */}
         {!products || !categoriesWithChildren || !pages ? null : (
