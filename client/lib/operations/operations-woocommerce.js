@@ -168,7 +168,7 @@ export const getProducts = async (query) => {
         }&category=${category ? category : ""}&tag=${tag ? tag : ""}&search=${
           search ? search : ""
         }`
-      : `${process.env.NEXT_PUBLIC_DEV_URL}/api/wc/store/products?page=${
+      : `${process.env.NEXT_PUBLIC_PUBLIC_URL}/api/wc/store/products?page=${
           !page ? 1 : page
         }&orderBy=${orderBy ? orderBy : "title-asc"}&max_price=${
           max_price ? max_price : 20000
