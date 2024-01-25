@@ -5,7 +5,7 @@ const Hero = ({ image, header, text, button_text, link }) => {
   const router = useRouter();
   return (
     <section
-      className="bg-white  h-screen pb-6 pl-6  sm:px-6 lg:px-24 lg:py-24 flex items-end justify-start"
+      className="bg-white sm:h-svh md:h-svh sm:max-h-svh md:hax-h-fit lg:h-screen pb-6 pl-6 lg:px-24 lg:py-24 flex items-end justify-start"
       style={{
         backgroundImage: `url(${image.src})`,
         backgroundPosition: "center",

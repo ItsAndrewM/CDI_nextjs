@@ -10,7 +10,7 @@ import Image from "next/image";
 
 const ProductCarousel = () => {
   return (
-    <div className="container mx-auto px-4 py-8 h-screen flex flex-col justify-center">
+    <div className="container mx-auto px-4 py-8 lg:h-screen flex flex-col justify-center">
       <Carousel className="flex-3">
         <CarouselContent>
           <CarouselItem>

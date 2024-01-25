@@ -6,8 +6,8 @@ const Cta = ({ image, link, header, text, button_text }) => {
   const router = useRouter();
 
   return (
-    <section className="container mx-auto px-4 py-8 h-screen flex items-center">
-      <div className="w-full md:w-1/2">
+    <section className="container mx-auto px-4 py-8 lg:h-screen flex items-center lg:flex-row md:flex-col sm:flex-col sm:border ">
+      <div className="w-full md:w-1/2 ">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">{header}</h2>
         <p className="text-xl text-gray-600 mb-4">{text}</p>
         <div className="flex justify-center mt-4">
@@ -19,7 +19,7 @@ const Cta = ({ image, link, header, text, button_text }) => {
           </Button>
         </div>
       </div>
-      <div className="w-full md:w-1/2 mt-8 md:mt-0 md:ml-8">
+      <div className="w-full md:w-1/2  mt-8 md:mt-0 md:ml-8">
         <Image
           alt="Sailing Image"
           className="w-full h-full object-cover rounded-md"
