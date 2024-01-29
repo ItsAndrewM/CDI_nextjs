@@ -115,7 +115,8 @@ const PayPalButton = ({ cart, id, setCart, setOrderId }) => {
     try {
       let response = await fetch(
         process.env.NODE_ENV === "production"
-          ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/wc/store/order/paypal/create-order`
+          ? // ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/wc/store/order/paypal/create-order`
+            `/api/wc/store/order/paypal/create-order`
           : "http://localhost:3000/api/wc/store/order/paypal/create-order",
         {
           method: "POST",
@@ -147,7 +148,8 @@ const PayPalButton = ({ cart, id, setCart, setOrderId }) => {
     try {
       let response = await axios.post(
         process.env.NODE_ENV === "production"
-          ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/wc/store/order/paypal/capture-order`
+          ? // ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/wc/store/order/paypal/capture-order`
+            `/api/wc/store/order/paypal/capture-order`
           : "http://localhost:3000/api/wc/store/order/paypal/capture-order",
         {
           orderID,
