@@ -17,6 +17,12 @@ const getShippingClasses = async () => {
     .catch((error) => error);
 };
 
+const getShippingMethods = async () => {
+  return await WooCommerce.get("shipping_methods")
+    .then((response) => response.data)
+    .catch((error) => error);
+};
+
 const getProducts = async () => {
   // return WooCommerce.get(`products?per_page=2&status=publish`)
   return await WooCommerce.get(
@@ -98,7 +104,8 @@ const handler = async (req, res) => {
   //   });
   // }
   try {
-    const response = await getProductWithoutIdButSlug();
+    const response = await getShippingClasses();
+    const methods = await getShippingMethods();
     //64
     if (!response) {
       console.log("RES: ", response);
@@ -106,7 +113,7 @@ const handler = async (req, res) => {
         .status(500)
         .json({ success: false, message: "Some Error Occured at backend" });
     }
-    res.status(200).json({ success: true, data: response });
+    res.status(200).json({ success: true, data: { response, methods } });
   } catch (error) {
     console.log(error);
   }

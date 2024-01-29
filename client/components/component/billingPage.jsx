@@ -23,10 +23,11 @@ import {
 import { CartContext } from "@/lib/context/cartContext";
 import { useRouter } from "next/router";
 import { Checkbox } from "../ui/checkbox";
+import CartCheckoutTotal from "./cart-checkout-total";
 
 export function BillingPage() {
   const [sameShippingAddress, setSameShippingAddress] = useState(true);
-  const { orderId, cart } = useContext(CartContext);
+  const { orderId, cart, setCart } = useContext(CartContext);
   const router = useRouter();
   const [countryCode, setCountryCode] = useState(null);
   const handleShippingSubmit = async (e) => {
@@ -48,7 +49,11 @@ export function BillingPage() {
           if (!response) {
             throw new Error(`Invalid response: ${response.status}`);
           }
-          router.push({ pathname: `/checkout/payment`, query: { orderId } });
+          setCart(response.data);
+          router.push({
+            pathname: `/checkout/shipping-method`,
+            query: { orderId },
+          });
         } catch (error) {
           console.error(error);
           alert(
@@ -100,7 +105,7 @@ export function BillingPage() {
   };
   return (
     <div className="mx-auto max-w-3xl space-y-6 border-2 border-gray-200 shadow-lg p-4 rounded-md my-8">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="lg:grid lg:grid-cols-2 gap-4 flex flex-col lg:p-0 p-4">
         <div className="col-span-1 space-y-6">
           <div className="space-y-2 text-center">
             <h1 className="text-3xl font-bold">Billing Address</h1>
@@ -126,7 +131,7 @@ export function BillingPage() {
             </div>
             {!sameShippingAddress ? (
               <>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="lg:grid lg:grid-cols-2 gap-4 flex flex-col ">
                   <div className="space-y-2">
                     <Label htmlFor="first-name">First Name</Label>
                     <Input
@@ -299,79 +304,7 @@ export function BillingPage() {
             </Button>
           </form>
         </div>
-        <div className="col-span-1 space-y-6">
-          <div className="space-y-2 text-center">
-            <h1 className="text-3xl font-bold">Your Cart</h1>
-            <p className="text-gray-500 dark:text-gray-400">
-              Review your items before checkout
-            </p>
-          </div>
-          <div className="space-y-4">
-            <div className="flex justify-between items-center border-b-2 pb-2">
-              <div className="flex items-center space-x-2">
-                <Image
-                  alt="Item 1"
-                  className="w-12 h-12"
-                  height="50"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "50/50",
-                    objectFit: "cover",
-                  }}
-                  width="50"
-                />
-                <p className="font-medium">Item 1</p>
-              </div>
-              <p className="font-medium">$20.00</p>
-            </div>
-            <div className="flex justify-between items-center border-b-2 pb-2">
-              <div className="flex items-center space-x-2">
-                <Image
-                  alt="Item 2"
-                  className="w-12 h-12"
-                  height="50"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "50/50",
-                    objectFit: "cover",
-                  }}
-                  width="50"
-                />
-                <p className="font-medium">Item 2</p>
-              </div>
-              <p className="font-medium">$15.00</p>
-            </div>
-            <div className="flex justify-between items-center border-b-2 pb-2">
-              <div className="flex items-center space-x-2">
-                <Image
-                  alt="Item 3"
-                  className="w-12 h-12"
-                  height="50"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "50/50",
-                    objectFit: "cover",
-                  }}
-                  width="50"
-                />
-                <p className="font-medium">Item 3</p>
-              </div>
-              <p className="font-medium">$30.00</p>
-            </div>
-            <div className="flex justify-between items-center pt-4">
-              <h2 className="text-xl font-bold">Subtotal</h2>
-              <p className="text-xl font-bold">$65.00</p>
-            </div>
-            <div className="flex justify-between items-center pt-4">
-              <h2 className="text-xl font-bold">Tax (10%)</h2>
-              <p className="text-xl font-bold">$6.50</p>
-            </div>
-            <div className="flex justify-between items-center pt-4">
-              <h2 className="text-xl font-bold">Total</h2>
-              <p className="text-xl font-bold">$71.50</p>
-            </div>
-          </div>
-        </div>
+        <CartCheckoutTotal cart={!cart ? null : cart} />
       </div>
     </div>
   );

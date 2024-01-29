@@ -23,7 +23,6 @@ const SearchBox = () => {
       if (router.query.search !== "") {
         const res = await searchProducts(router.query.search);
         if (res) {
-          console.log(res);
           setSearchResults(res);
         } else {
           setSearchResults([]);

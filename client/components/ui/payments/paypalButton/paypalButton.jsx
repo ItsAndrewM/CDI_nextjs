@@ -1,4 +1,8 @@
 import {
+  addPaymentMethodToOrder,
+  getCart,
+} from "@/lib/operations/operations-woocommerce";
+import {
   PayPalScriptProvider,
   usePayPalScriptReducer,
   getScriptID,
@@ -11,7 +15,7 @@ import { useContext, useState } from "react";
 
 const SCRIPT_PROVIDER_OPTIONS = {
   clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
-  currency: "USD",
+  currency: "CAD",
   intent: "capture",
 };
 const LoadScriptButton = () => {
@@ -71,65 +75,39 @@ function PrintLoadingState() {
   return <div>Current status: {status}</div>;
 }
 
-const PayPalButton = ({ cart, id }) => {
+const PayPalButton = ({ cart, id, setCart, setOrderId }) => {
   const [checkoutId, setCheckoutId] = useState(id);
-  const { swell } = useContext(Context);
   const router = useRouter();
-  const swellCreateOrder = async () => {
-    try {
-      let response = await fetch(
-        process.env.NODE_ENV === "production"
-          ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/swell/create-order`
-          : "http://localhost:3000/api/swell/create-order",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            amount: cart.grand_total,
-            account_id: cart.account_id,
-            method: "paypal_checkout",
-          }),
-        }
-      )
-        .then((response) => response.json())
-        .then((order) => {
-          return order;
-        });
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  const swellCreatePayment = async (order_id, paypal_order_id) => {
-    try {
-      let response = await fetch(
-        process.env.NODE_ENV === "production"
-          ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/swell/create-payment`
-          : "http://localhost:3000/api/swell/create-payment",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            amount: cart.grand_total,
-            account_id: cart.account_id,
-            method: "paypal_checkout",
-            order_id: order_id,
-            paypal_order_id: paypal_order_id,
-          }),
+  const wooCreatePayment = async (order_id, paypal_order_id) => {
+    if (paypal_order_id) {
+      try {
+        const response = await addPaymentMethodToOrder(
+          order_id,
+          paypal_order_id
+        );
+
+        if (!response.success) {
+          throw new Error(`Invalid response: ${response.status}`);
         }
-      )
-        .then((response) => response.json())
-        .then((order) => {
-          return order;
+        const oldId = order_id;
+        const newCart = await getCart();
+        setOrderId(newCart.data.id);
+        setCart(newCart.data);
+        localStorage.setItem(
+          "woocommerce-cart-order-id",
+          JSON.stringify(newCart.data.id)
+        );
+        router.push({
+          pathname: `/thanks-for-ordering-from-cdi-furlers`,
+          query: { order_id: oldId },
         });
-      return response;
-    } catch (error) {
-      console.log(error);
+      } catch (err) {
+        console.error(err);
+        alert(
+          "We can't submit the form, please review your answers and try again."
+        );
+      }
     }
   };
 
@@ -137,17 +115,18 @@ const PayPalButton = ({ cart, id }) => {
     try {
       let response = await fetch(
         process.env.NODE_ENV === "production"
-          ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/paypal/create-order`
-          : "http://localhost:3000/api/paypal/create-order",
+          ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/wc/store/order/paypal/create-order`
+          : "http://localhost:3000/api/wc/store/order/paypal/create-order",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            cart: cart.items,
-            user_id: cart.account_id,
-            order_price: cart.capture_total,
+            cart: cart.line_items,
+            user_id: cart.id,
+            order_price: cart.total,
+            currency: cart.currency,
           }),
         }
       )
@@ -168,26 +147,13 @@ const PayPalButton = ({ cart, id }) => {
     try {
       let response = await axios.post(
         process.env.NODE_ENV === "production"
-          ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/paypal/capture-order`
-          : "http://localhost:3000/api/paypal/capture-order",
+          ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/wc/store/order/paypal/capture-order`
+          : "http://localhost:3000/api/wc/store/order/paypal/capture-order",
         {
           orderID,
         }
       );
       if (response.data.success) {
-        if (swell) {
-          await swell.cart.update({
-            billing: {
-              method: "paypal_checkout",
-            },
-            metadata: {
-              paypal_checkout: {
-                order_id: response.data.data.id,
-              },
-            },
-          });
-        }
-
         return response.data;
         // Order is successful
         // Your custom code
@@ -229,17 +195,16 @@ const PayPalButton = ({ cart, id }) => {
         }}
         onApprove={async (data, actions) => {
           let response = await paypalCaptureOrder(data.orderID);
-
           if (response.success) {
-            if (swell) {
-              const submitOrder = await swell.cart.submitOrder();
-              const swellResponse = await swellCreatePayment(
-                submitOrder.id,
-                submitOrder.metadata.paypal_checkout.order_id
-              );
-              if (swellResponse.success) {
-                router.push(`/checkout/${swellResponse.data.order_id}/order`);
-              }
+            if (id) {
+              await wooCreatePayment(id, response.data.id);
+              // console.log(wooResponse);
+              // if (wooResponse.success) {
+              //   router.push({
+              //     pathname: `/thanks-for-ordering-from-cdi-furlers`,
+              //     query: { orderId },
+              //   });
+              // }
               // const swellOrderResponse = await swellCreateOrder();
             }
             return true;

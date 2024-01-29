@@ -19,9 +19,10 @@ import { useContext, useState } from "react";
 import { addShippingToOrder } from "@/lib/operations/operations-woocommerce";
 import { CartContext } from "@/lib/context/cartContext";
 import { useRouter } from "next/router";
+import CartCheckoutTotal from "./cart-checkout-total";
 
 export function CheckoutPage() {
-  const { orderId } = useContext(CartContext);
+  const { orderId, cart, setCart } = useContext(CartContext);
   const router = useRouter();
   const [countryCode, setCountryCode] = useState(null);
 
@@ -44,7 +45,6 @@ export function CheckoutPage() {
         return acc;
       }, {});
       try {
-        console.log("trying");
         const response = await addShippingToOrder(orderId, data);
         // await swell.init(swellConfig.storeId, swellConfig.publicKey);
         // const response = await swell.cart.update({
@@ -53,6 +53,7 @@ export function CheckoutPage() {
         if (!response) {
           throw new Error(`Invalid response: ${response.status}`);
         }
+        setCart(response.data);
         router.push({ pathname: `/checkout/billing`, query: { orderId } });
       } catch (err) {
         console.error(err);
@@ -66,7 +67,7 @@ export function CheckoutPage() {
   };
   return (
     <div className="mx-auto max-w-3xl space-y-6 border-2 border-gray-200 shadow-lg p-4 rounded-md my-8">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="lg:grid lg:grid-cols-2 gap-4 flex flex-col ">
         <div className="col-span-1 space-y-6">
           <div className="space-y-2 text-center">
             <h1 className="text-3xl font-bold">Shipping Address</h1>
@@ -75,7 +76,7 @@ export function CheckoutPage() {
             </p>
           </div>
           <form className="space-y-4" onSubmit={handleShippingSubmit}>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="lg:grid lg:grid-cols-2 gap-4 flex flex-col ">
               <div className="space-y-2">
                 <Label htmlFor="first-name">First Name</Label>
                 <Input
@@ -175,7 +176,14 @@ export function CheckoutPage() {
                   <SelectContent>
                     <SelectGroup>
                       {!countryCode
-                        ? null
+                        ? State.getStatesOfCountry("CA").map((state) => (
+                            <SelectItem
+                              value={state.isoCode}
+                              key={state.isoCode}
+                            >
+                              {state.name}
+                            </SelectItem>
+                          ))
                         : State.getStatesOfCountry(countryCode).map((state) => (
                             <SelectItem
                               value={state.isoCode}
@@ -244,79 +252,7 @@ export function CheckoutPage() {
             </Button>
           </form>
         </div>
-        <div className="col-span-1 space-y-6">
-          <div className="space-y-2 text-center">
-            <h1 className="text-3xl font-bold">Your Cart</h1>
-            <p className="text-gray-500 dark:text-gray-400">
-              Review your items before checkout
-            </p>
-          </div>
-          <div className="space-y-4">
-            <div className="flex justify-between items-center border-b-2 pb-2">
-              <div className="flex items-center space-x-2">
-                <Image
-                  alt="Item 1"
-                  className="w-12 h-12"
-                  height="50"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "50/50",
-                    objectFit: "cover",
-                  }}
-                  width="50"
-                />
-                <p className="font-medium">Item 1</p>
-              </div>
-              <p className="font-medium">$20.00</p>
-            </div>
-            <div className="flex justify-between items-center border-b-2 pb-2">
-              <div className="flex items-center space-x-2">
-                <Image
-                  alt="Item 2"
-                  className="w-12 h-12"
-                  height="50"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "50/50",
-                    objectFit: "cover",
-                  }}
-                  width="50"
-                />
-                <p className="font-medium">Item 2</p>
-              </div>
-              <p className="font-medium">$15.00</p>
-            </div>
-            <div className="flex justify-between items-center border-b-2 pb-2">
-              <div className="flex items-center space-x-2">
-                <Image
-                  alt="Item 3"
-                  className="w-12 h-12"
-                  height="50"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "50/50",
-                    objectFit: "cover",
-                  }}
-                  width="50"
-                />
-                <p className="font-medium">Item 3</p>
-              </div>
-              <p className="font-medium">$30.00</p>
-            </div>
-            <div className="flex justify-between items-center pt-4">
-              <h2 className="text-xl font-bold">Subtotal</h2>
-              <p className="text-xl font-bold">$65.00</p>
-            </div>
-            <div className="flex justify-between items-center pt-4">
-              <h2 className="text-xl font-bold">Tax (10%)</h2>
-              <p className="text-xl font-bold">$6.50</p>
-            </div>
-            <div className="flex justify-between items-center pt-4">
-              <h2 className="text-xl font-bold">Total</h2>
-              <p className="text-xl font-bold">$71.50</p>
-            </div>
-          </div>
-        </div>
+        <CartCheckoutTotal cart={!cart ? null : cart} />
       </div>
     </div>
   );

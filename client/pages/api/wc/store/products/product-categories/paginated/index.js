@@ -1,17 +1,6 @@
-// const getCategories = async () => {
-//   return await fetch(
-//     `${process.env.PUBLIC_URL}/wp-json/wc/store/v1/products/categories`
-//   )
-//     .then((response) => response.json())
-//     .then((data) => {
-//       return data;
-//     });
-// };
-
 import { PER_PAGE } from "@/lib/operations/operations-woocommerce";
 import { WooCommerce } from "../../reports";
 const getCategories = async (order, orderBy, page) => {
-  console.log(order, orderBy, page);
   return await WooCommerce.get(
     `products/categories?per_page=${PER_PAGE}&order=${
       order ? order : "asc"
@@ -32,7 +21,6 @@ const getCategories = async (order, orderBy, page) => {
 };
 
 const handler = async (req, res) => {
-  console.log(req.query);
   if (req.method != "GET")
     return res.status(404).json({ success: false, message: "Not Found" });
   if (!req.query) {

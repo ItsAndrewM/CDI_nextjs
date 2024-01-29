@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 const CtaAndAccordion = ({ data, button_text, link, image }) => {
   const router = useRouter();
   return (
-    <section className="container mx-auto px-4 py-8 lg:h-screen sm:h-svh md:h-svh sm:max-h-max  flex items-center lg:flex-row md:flex-col  sm:flex-col">
+    <section className="container mx-auto px-4 py-8 lg:h-screen h-svh md:h-svh sm:max-h-max  flex items-center lg:flex-row flex-col">
       <div className="w-full md:w-1/2">
         <Image
           alt="Product Image"

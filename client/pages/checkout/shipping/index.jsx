@@ -1,11 +1,17 @@
 import { CheckoutPage } from "@/components/component/checkoutPage";
 import Layout from "@/components/ui/layout/layout";
+import Head from "next/head";
 
 const Page = () => {
   return (
-    <Layout>
-      <CheckoutPage />
-    </Layout>
+    <>
+      <Head>
+        <title>CDI Furlers | Shipping Address</title>
+      </Head>
+      <Layout>
+        <CheckoutPage />
+      </Layout>
+    </>
   );
 };
 

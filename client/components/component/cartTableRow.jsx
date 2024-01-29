@@ -9,8 +9,10 @@ import {
   updateItemInCart,
 } from "@/lib/operations/operations-woocommerce";
 import { CartContext } from "@/lib/context/cartContext";
-import { MinusIcon, TrashIcon, PlusIcon } from "./cart-layout";
 import LoadingSpinner from "../ui/loadingSpinner";
+import { TrashIcon } from "../icons/trashIcon";
+import { MinusIcon } from "../icons/minusIcon";
+import { PlusIcon } from "../icons/plusIcon";
 
 const CartTableRow = ({ item }) => {
   const { orderId, setCart } = useContext(CartContext);

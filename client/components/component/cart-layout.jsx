@@ -24,8 +24,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CartTableRow from "./cartTableRow";
 
-export function CartLayout({ cart }) {
-  console.log(cart);
+export function CartLayout({ cart, orderId }) {
   return (
     <div className="flex flex-col gap-6 p-4 md:p-6">
       <h1 className="text-2xl font-semibold">Your Cart</h1>
@@ -58,7 +57,6 @@ export function CartLayout({ cart }) {
                   </TableRow>
                 ) : (
                   cart.line_items.map((item) => {
-                    console.log(item);
                     return <CartTableRow item={item} key={item.id} />;
                   })
                 )}
@@ -138,7 +136,10 @@ export function CartLayout({ cart }) {
                     ? "/products"
                     : !cart.line_items.length
                     ? "/products"
-                    : "/checkout"
+                    : {
+                        pathname: "/checkout",
+                        query: { orderId: !orderId ? "" : orderId },
+                      }
                 }
                 className="w-full"
               >
@@ -157,63 +158,3 @@ export function CartLayout({ cart }) {
     </div>
   );
 }
-
-export const MinusIcon = (props) => {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M5 12h14" />
-    </svg>
-  );
-};
-
-export const PlusIcon = (props) => {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M5 12h14" />
-      <path d="M12 5v14" />
-    </svg>
-  );
-};
-
-export const TrashIcon = (props) => {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M3 6h18" />
-      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2v2" />
-    </svg>
-  );
-};

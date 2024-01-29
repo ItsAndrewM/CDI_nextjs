@@ -37,7 +37,9 @@ export function ProductPage({ product }) {
           orderId,
           product.id,
           selected.id,
-          quantity > 1 ? quantity : 1
+          quantity > 1 ? quantity : 1,
+          product.shipping_class,
+          product.shipping_class_id
         );
         if (newItem) {
           setButtonText("Added");

@@ -17,13 +17,30 @@ import { WooCommerce } from "../../products/reports";
 //   }
 
 // );
-const addItemToCart = async (id, product_id, quantity, variation_id) => {
+const addItemToCart = async (
+  id,
+  product_id,
+  quantity,
+  variation_id,
+  shipping_class,
+  shipping_class_id
+) => {
   return await WooCommerce.put(`orders/${id}`, {
     line_items: [
       {
         product_id: product_id,
         variation_id: variation_id,
         quantity: !quantity ? 1 : quantity,
+      },
+    ],
+    meta_data: [
+      {
+        key: "shipping_class",
+        value: shipping_class,
+      },
+      {
+        key: "shipping_class_id",
+        value: shipping_class_id,
       },
     ],
   })
@@ -37,11 +54,14 @@ const handler = async (req, res) => {
     !req.body.id ||
     !req.body.product_id ||
     !req.body.quantity ||
-    !req.body.variation_id
+    !req.body.variation_id ||
+    !req.body.shipping_class ||
+    !req.body.shipping_class_id
   )
     return res.status(400).json({
       success: false,
-      message: "Please Provide item id, quantity, variant and product id",
+      message:
+        "Please Provide item id, quantity, variant and product id, shipping class and shipping class id",
     });
   // const variation = [
   //   {
@@ -54,7 +74,9 @@ const handler = async (req, res) => {
       req.body.id,
       req.body.product_id,
       req.body.quantity,
-      req.body.variation_id
+      req.body.variation_id,
+      req.body.shipping_class,
+      req.body.shipping_class_id
     );
     if (response.data) {
       if (response.data.status) {

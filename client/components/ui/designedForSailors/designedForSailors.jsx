@@ -49,16 +49,6 @@ const DesignedForSailors = () => {
   return (
     <div key="1" className="flex flex-col min-h-[100vh] align-center">
       <main className="flex-1">
-        <section className="w-full flex justify-center">
-          <div>
-            <Image
-              height="265"
-              width="420"
-              src="/images/logos/cdi_logo.png"
-              alt="CDI Logo"
-            />
-          </div>
-        </section>
         <section className="w-full pb-12 md:pb-24 lg:pb-32 xl:pb-48 flex justify-center">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
@@ -109,7 +99,7 @@ const DesignedForSailors = () => {
               alt="Hero"
               className="mx-auto aspect-[2/1] overflow-hidden rounded-xl object-cover object-center mt-8"
               height="600"
-              src="/designedForSailors/Inspecting-your-furler-calico-skies-edited.png"
+              src="/images/designedForSailors/Inspecting-your-furler-calico-skies-edited.png"
               width="1200"
             />
           </div>
@@ -121,7 +111,7 @@ const DesignedForSailors = () => {
                 alt="Image"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full"
                 height="310"
-                src="/designedForSailors/CDI-FlexibleFurler-FF2.jpg"
+                src="/images/designedForSailors/CDI-FlexibleFurler-FF2.jpg"
                 width="550"
               />
               <div className="flex flex-col justify-center space-y-4">
@@ -196,7 +186,7 @@ const DesignedForSailors = () => {
                 alt="Image"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full"
                 height="310"
-                src="/designedForSailors/sailing-uma-rough-waters-wide-1024x546.jpg"
+                src="/images/designedForSailors/sailing-uma-rough-waters-wide-1024x546.jpg"
                 width="550"
               />
             </div>
@@ -209,7 +199,7 @@ const DesignedForSailors = () => {
                 alt="Image"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full"
                 height="310"
-                src="/designedForSailors/headsail.jpg"
+                src="/images/designedForSailors/headsail.jpg"
                 width="550"
               />
               <div className="flex flex-col justify-center space-y-4">
@@ -284,7 +274,7 @@ const DesignedForSailors = () => {
                 alt="Image"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full"
                 height="310"
-                src="/designedForSailors/CDI-MR2-Parts.jpg"
+                src="/images/designedForSailors/CDI-MR2-Parts.jpg"
                 width="550"
               />
             </div>

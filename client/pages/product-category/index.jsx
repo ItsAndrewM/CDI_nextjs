@@ -18,7 +18,6 @@ export const getServerSideProps = async (context) => {
     context.query.sort ? context.query.sort : "name-asc",
     context.query.page ? context.query.page : 1
   );
-  console.log(data);
   return {
     props: {
       categories: data.data.categories || null,

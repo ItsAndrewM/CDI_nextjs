@@ -4,6 +4,9 @@
  */
 import Link from "next/link";
 import { CardContent, Card } from "@/components/ui/card";
+import { MailIcon } from "../icons/mailIcon";
+import { PhoneIcon } from "../icons/phoneIcon";
+import { CalendarIcon } from "../icons/calendarIcon";
 
 export function ContactBanner() {
   return (
@@ -43,73 +46,10 @@ export function ContactBanner() {
             <Link
               className="line-clamp-1 text-xs hover:text-blue-500 transition-colors duration-200"
               href="tel:1-(888)-880-6813"
-            >
-              1-(888)-880-6813
-            </Link>
+            ></Link>
           </div>
         </div>
       </CardContent>
     </Card>
-  );
-}
-
-function CalendarIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-      <line x1="16" x2="16" y1="2" y2="6" />
-      <line x1="8" x2="8" y1="2" y2="6" />
-      <line x1="3" x2="21" y1="10" y2="10" />
-    </svg>
-  );
-}
-
-function MailIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect width="20" height="16" x="2" y="4" rx="2" />
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 1-2.06 0L2 7" />
-    </svg>
-  );
-}
-
-function PhoneIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M22 16.92v3a2 2 0 1-2.18 19.79 1-8.63-3.07 19.5 1-6-6 1-3.07-8.67A2 1 4.11 2h3a2 1.72 12.84 .7 2.81 1-.45 2.11L8.09 9.91a16 16 6 6l1.27-1.27a2 2.11-.45 2.81.7A2 22 16.92z" />
-    </svg>
   );
 }

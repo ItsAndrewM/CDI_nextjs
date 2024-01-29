@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      <main className="overflow-x-hidden">{children}</main>
+      <main className="max-w-screen-3xl ">{children}</main>
       <Footer />
     </>
   );

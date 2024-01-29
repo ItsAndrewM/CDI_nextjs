@@ -114,7 +114,6 @@ export const getProductPath = async () => {
         }
       }
     }
-    console.log(paths);
     return paths;
   }
 };
@@ -211,7 +210,9 @@ export const addItemToCart = async (
   id,
   product_id,
   variation_id,
-  quantity = 1
+  quantity = 1,
+  shipping_class,
+  shipping_class_id
 ) => {
   const data = await fetch(
     process.env.NODE_ENV === "development"
@@ -223,10 +224,12 @@ export const addItemToCart = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: id,
-        product_id: product_id,
-        quantity: quantity,
-        variation_id: variation_id,
+        id,
+        product_id,
+        quantity,
+        variation_id,
+        shipping_class,
+        shipping_class_id,
       }),
     }
   );
@@ -316,6 +319,54 @@ export const addBillingToOrder = async (id, billing) => {
       body: JSON.stringify({
         id: id,
         billing: billing,
+      }),
+    }
+  )
+    .then((response) => response.json())
+    .catch((error) => error);
+  return data;
+};
+
+export const addShippingClassToOrder = async (id, shipping_class) => {
+  const data = await fetch(
+    process.env.NODE_ENV === "development"
+      ? `${process.env.NEXT_PUBLIC_DEV_URL}/api/wc/store/order/add-shipping-method`
+      : `${process.env.NEXT_PUBLIC_PUBLIC_URL}/api/wc/store/order/add-shipping-method`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+        shipping_lines: [
+          {
+            method_title: "Flat rate",
+            method_id: "flat_rate",
+            total: shipping_class.value === "hardware" ? "35.00" : "150.00",
+          },
+        ],
+      }),
+    }
+  )
+    .then((response) => response.json())
+    .catch((error) => error);
+  return data;
+};
+
+export const addPaymentMethodToOrder = async (id, transaction_id) => {
+  const data = await fetch(
+    process.env.NODE_ENV === "development"
+      ? `${process.env.NEXT_PUBLIC_DEV_URL}/api/wc/store/order/add-payment-method`
+      : `${process.env.NEXT_PUBLIC_PUBLIC_URL}/api/wc/store/order/add-payment-method`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+        transaction_id: transaction_id,
       }),
     }
   )

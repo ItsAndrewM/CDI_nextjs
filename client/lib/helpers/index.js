@@ -114,13 +114,10 @@ export const formatCartItemTotal = (item) => {
 };
 
 export const deleteKeyReturnObject = (object, keys) => {
-  console.log(object);
-  console.log(keys);
   const newObject = object;
   Object.keys(keys).forEach((key) => {
     delete newObject[key];
   });
-  console.log(newObject);
   return newObject;
 };
 
@@ -149,7 +146,6 @@ export const getQuery = (query, filter) => {
 };
 
 export const getIfChecked = (query, filter) => {
-  console.log(query);
   if (Object.values(filter).length > 1) {
     if (
       Object.values(query).includes(Object.values(filter)[0]) &&

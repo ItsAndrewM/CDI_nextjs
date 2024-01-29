@@ -15,6 +15,9 @@ import { CartContext } from "@/lib/context/cartContext";
 import { useContext } from "react";
 import CartCard from "./cart-card";
 import { useRouter } from "next/router";
+import { ShoppingCartIcon } from "../icons/shoppingCartIcon";
+import { PackageIcon } from "../icons/packageIcon";
+import { CrossIcon } from "../icons/crossIcon";
 
 export function CartSidebar({ dialogRef }) {
   const { cart, orderId } = useContext(CartContext);
@@ -35,7 +38,7 @@ export function CartSidebar({ dialogRef }) {
           variant="outline"
           onClick={() => dialogRef.current.close()}
         >
-          <Cross />
+          <CrossIcon />
           <span className="sr-only">close cart</span>
         </Button>
       </div>
@@ -61,7 +64,7 @@ export function CartSidebar({ dialogRef }) {
           <div className="flex-1 overflow-auto py-2">
             <div className="grid items-start px-4 text-sm font-medium max-h-[550px] overflow-y-scroll">
               <div className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500  ">
-                {/* <ShoppingCartIcon /> */}
+                <ShoppingCartIcon />
                 <span className="font-semibold">Your Cart</span>
               </div>
               {!cart.line_items.length ? (
@@ -69,7 +72,7 @@ export function CartSidebar({ dialogRef }) {
                   <div className="grid items-start px-4 text-sm font-medium">
                     <div className="flex items-center justify-center h-full">
                       <div className="text-center">
-                        {/* <ShoppingCartIcon className="h-16 w-16 text-gray-400 " /> */}
+                        <ShoppingCartIcon className="h-16 w-16 text-gray-400 " />
                         <p className="mt-4 text-gray-500 ">
                           Your cart is currently empty.
                         </p>
@@ -105,19 +108,49 @@ export function CartSidebar({ dialogRef }) {
               )}
             </CardHeader>
             <CardContent>
-              <Button
-                className="w-full bg-cdiBlue text-white hover:bg-cdiLightBlue hover:text-black"
-                variant="solid"
-                size="sm"
-                onClick={() => {
-                  router.push({
-                    pathname: "/checkout",
-                    query: { orderId },
-                  });
-                }}
-              >
-                Checkout
-              </Button>
+              {!cart ? (
+                <Button
+                  className="w-full bg-cdiBlue text-white hover:bg-cdiLightBlue hover:text-black"
+                  variant="solid"
+                  size="sm"
+                  onClick={() => {
+                    dialogRef.current.close();
+                    router.push({
+                      pathname: "/products",
+                    });
+                  }}
+                >
+                  Continue Shopping
+                </Button>
+              ) : !cart.line_items.length ? (
+                <Button
+                  className="w-full bg-cdiBlue text-white hover:bg-cdiLightBlue hover:text-black"
+                  variant="solid"
+                  size="sm"
+                  onClick={() => {
+                    dialogRef.current.close();
+                    router.push({
+                      pathname: "/products",
+                    });
+                  }}
+                >
+                  Continue Shopping
+                </Button>
+              ) : (
+                <Button
+                  className="w-full bg-cdiBlue text-white hover:bg-cdiLightBlue hover:text-black"
+                  variant="solid"
+                  size="sm"
+                  onClick={() => {
+                    router.push({
+                      pathname: "/checkout",
+                      query: { orderId },
+                    });
+                  }}
+                >
+                  Checkout
+                </Button>
+              )}
             </CardContent>
           </Card>
         )}
@@ -125,68 +158,5 @@ export function CartSidebar({ dialogRef }) {
     </dialog>
     // </div>
     // </div>
-  );
-}
-
-function ShoppingCartIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="8" cy="21" r="1" />
-      <circle cx="19" cy="21" r="1" />
-      <path d="M2.05 2.05h2l2.66 12.42a2 2 0 1.58h9.78a2 1.95-1.57l1.65-7.43H5.12" />
-    </svg>
-  );
-}
-
-const Cross = ({ ...props }) => {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M18 6L6 18" />
-      <path d="M6 6l12 12" />
-    </svg>
-  );
-};
-
-function PackageIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m7.5 4.27 9 5.15" />
-      <path d="M21 8a2 2 0 0-1-1.73l-7-4a2 0-2 0l-7 4A2 3 8v8a2 1 1.73l7 4a2 0l7-4A2 21 16Z" />
-      <path d="m3.3 7 8.7 5 8.7-5" />
-      <path d="M12 22V12" />
-    </svg>
   );
 }

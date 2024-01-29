@@ -14,6 +14,8 @@ import {
   NavigationMenuSub,
 } from "../../navigation-menu";
 import SearchBox from "../../searchBox/searchBox";
+import { MobileHeader } from "@/components/component/mobile-header";
+import { ShoppingCartIcon } from "@/components/icons/shoppingCartIcon";
 
 const NavigationLinks = () => {
   const dialogRef = useRef();
@@ -21,11 +23,12 @@ const NavigationLinks = () => {
     if (dialogRef.current.open) {
       dialogRef.current.close();
     } else {
-      dialogRef.current.show();
+      dialogRef.current.showModal();
     }
   };
   return (
     <div className="w-full flex items-center justify-center ">
+      <MobileHeader dialogRef={dialogRef} />
       <NavigationMenu className="hidden lg:flex lg:justify-between lg:items-center lg:w-full  [&>div]:w-full">
         <NavigationMenuList className="w-full ">
           {/* <ul className="flex w-full space-x-4 items-center justify-between"> */}
@@ -79,25 +82,6 @@ const NavigationLinks = () => {
   );
 };
 
-function ChevronDownIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m6 9 6 6 6-6" />
-    </svg>
-  );
-}
-
 function SearchIcon(props) {
   return (
     <svg
@@ -114,27 +98,6 @@ function SearchIcon(props) {
     >
       <circle cx="11" cy="11" r="8" />
       <path d="m21 21-4.3-4.3" />
-    </svg>
-  );
-}
-
-function ShoppingCartIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="8" cy="21" r="1" />
-      <circle cx="19" cy="21" r="1" />
-      <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
     </svg>
   );
 }

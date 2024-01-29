@@ -150,6 +150,7 @@ export const CartProvider = ({ children }) => {
         cart,
         setCart,
         orderId,
+        setOrderId,
         // nonce,
         // setNonce,
       }}
