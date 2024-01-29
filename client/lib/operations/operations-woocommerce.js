@@ -398,3 +398,32 @@ export const getPosts = async (page) => {
   const posts = await data.json();
   return posts.data;
 };
+
+export const getPostPaths = async () => {
+  const posts = await getPosts();
+  return posts.posts.map((post) => {
+    return { slug: post.slug, id: post.id };
+  });
+};
+
+export const findPostIdBySlug = async (slug) => {
+  const posts = await getPosts();
+  const post = posts.posts.find((post) => post.slug === slug);
+  return post.id;
+};
+
+export const getPostById = async (id) => {
+  const data = await fetch(
+    process.env.NODE_ENV === "development"
+      ? `${process.env.NEXT_PUBLIC_DEV_URL}/api/wp/posts/post/${id}`
+      : `${process.env.NEXT_PUBLIC_PUBLIC_URL}/api/wp/posts/post/${id}`
+  );
+  const post = await data.json();
+  return post.data;
+};
+
+export const getPostImage = async (url) => {
+  return await fetch(url)
+    .then((response) => response.json())
+    .catch((error) => error);
+};
