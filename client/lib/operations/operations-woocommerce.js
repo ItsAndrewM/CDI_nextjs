@@ -374,3 +374,13 @@ export const addPaymentMethodToOrder = async (id, transaction_id) => {
     .catch((error) => error);
   return data;
 };
+
+export const getPageData = async (id) => {
+  const data = await fetch(
+    process.env.NODE_ENV === "development"
+      ? `${process.env.NEXT_PUBLIC_DEV_URL}/api/wp/pages/${id}`
+      : `${process.env.NEXT_PUBLIC_PUBLIC_URL}/api/wp/pages/${id}`
+  );
+  const page = await data.json();
+  return page.data;
+};
