@@ -76,7 +76,7 @@ export function MobileHeader({ dialogRef }) {
                         <Link
                           key={subItem.title + index}
                           className="group grid h-auto w-full justify-start gap-1"
-                          href="#"
+                          href={subItem.url}
                         >
                           <div className="text-sm font-medium leading-none group-hover:underline">
                             {subItem.title}
