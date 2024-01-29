@@ -1,14 +1,21 @@
-// export const getServerSideProps = async () => {
-//     return {
-//         props: {},
-//     };
-// };
+export const getServerSideProps = async () => {
+  const posts = await getPosts();
+  return {
+    props: {
+      posts: posts.posts || null,
+      total_pages: posts.total_pages || null,
+    },
+  };
+};
 
+import { BlogPostLayout } from "@/components/component/blog-post-layout";
 import Layout from "@/components/ui/layout/layout";
 import { SITE_DESCRIPTION } from "@/lib/helpers";
+import { getPosts } from "@/lib/operations/operations-woocommerce";
 import Head from "next/head";
 
-const Page = () => {
+const Page = ({ posts, total_pages }) => {
+  console.log(posts);
   return (
     <>
       <Head>
@@ -47,7 +54,7 @@ const Page = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
       </Head>
-      <Layout></Layout>
+      <Layout>{!posts ? null : <BlogPostLayout posts={posts} />}</Layout>
     </>
   );
 };

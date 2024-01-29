@@ -384,3 +384,17 @@ export const getPageData = async (id) => {
   const page = await data.json();
   return page.data;
 };
+
+export const getPosts = async (page) => {
+  const data = await fetch(
+    process.env.NODE_ENV === "development"
+      ? `${process.env.NEXT_PUBLIC_DEV_URL}/api/wp/posts?page=${
+          !page ? 1 : page
+        }`
+      : `${process.env.NEXT_PUBLIC_PUBLIC_URL}/api/wp/posts?page=${
+          !page ? 1 : page
+        }`
+  );
+  const posts = await data.json();
+  return posts.data;
+};

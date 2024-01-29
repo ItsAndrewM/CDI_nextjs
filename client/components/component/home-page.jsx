@@ -16,9 +16,9 @@ export function HomePage() {
   return (
     <div
       key="1"
-      className="flex flex-col min-h-screen bg-gray-100 overflow-x-hidden"
+      className="flex flex-col min-h-screen bg-gray-100 overflow-hidden"
     >
-      <main className="flex-1 flex-col  ">
+      <main className="flex-1 flex-col ">
         <Hero
           image={heroImage}
           link={"/products"}
@@ -43,9 +43,9 @@ export function HomePage() {
           link={"/products"}
           button_text={"Learn more"}
         />
-        <section className="bg-cdiLightBlue text-white lg:h-screen px-4 sm:px-6 lg:px-8 flex items-center">
-          <div className="container mx-auto sm:h-full md:h-full flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-1/2 flex flex-col gap-8 sm:h-full md:h-full">
+        <section className="bg-cdiLightBlue text-white lg:h-max px-6 lg:p-8 flex items-center py-12">
+          <div className="container mx-auto h-full md:h-full flex flex-col md:flex-row items-center">
+            <div className="w-full md:w-1/2 flex flex-col items-center justify-center gap-8 h-full md:h-full">
               <h2 className="text-5xl font-bold text-cdiBlue  mb-4">
                 Sailing With Ease And Confidence
               </h2>
@@ -60,7 +60,7 @@ export function HomePage() {
                 sail the open water.
               </p>
             </div>
-            <div className="w-full md:w-1/2 grid grid-cols-2 gap-4 mt-8 md:mt-0 md:ml-8 sm:h-full md:h-full">
+            <div className="w-full md:w-1/2 grid grid-cols-2 gap-4 mt-8 md:mt-0 md:ml-8 h-full md:h-full">
               <div className="flex flex-col items-center">
                 <CheckmarkCircle className="h-40 w-40" />
                 <h3 className="text-2xl text-cdiDarkBlue font-bold">

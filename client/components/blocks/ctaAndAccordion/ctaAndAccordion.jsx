@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 const CtaAndAccordion = ({ data, button_text, link, image }) => {
   const router = useRouter();
   return (
-    <section className="container mx-auto px-4 py-8 lg:h-screen h-svh md:h-svh sm:max-h-max  flex items-center lg:flex-row flex-col">
+    <section className="container mx-auto px-4 my-8 pb-8 lg:h-screen h-svh md:h-svh flex items-center lg:flex-row flex-col">
       <div className="w-full md:w-1/2">
         <Image
           alt="Product Image"
@@ -43,7 +43,7 @@ const CtaAndAccordion = ({ data, button_text, link, image }) => {
         </Accordion>
         <div className="flex justify-center mt-4">
           <Button
-            className="mt-4 bg-cdiBlue text-white hover:bg-white hover:text-cdiBlue"
+            className="mt-4 bg-cdiBlue text-white hover:bg-cdiLightBlue hover:text-black"
             onClick={() => router.push(link)}
           >
             {button_text.toUpperCase()}
