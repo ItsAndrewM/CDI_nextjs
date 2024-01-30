@@ -197,11 +197,12 @@ export function PaymentsPage() {
         </form>
         <div className="flex flex-col gap-4">
           <CartCheckoutTotal cart={!cart ? null : cart} />
-          {/* <p className="text-sm text-gray-500  mb-2">
-            Prices are in CAD. The currency selected is what you'll be charged
-            in.
+          <p className="text-sm text-gray-500  mb-2">
+            Prices are in CAD.
+            {/* The currency selected is what you'll be charged
+            in. */}
           </p>
-          <Currency setCurrencyCode={setCurrencyCode} /> */}
+          {/* <Currency setCurrencyCode={setCurrencyCode} /> */}
           {!cart ? null : (
             <div className="[&>*]:relative [&>*]:z-0">
               <PayPalButton
