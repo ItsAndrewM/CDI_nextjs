@@ -59,16 +59,42 @@ export function ShippingMethodPage() {
     e.preventDefault();
     if (shippingClass) {
       try {
-        const response = await addShippingClassToOrder(orderId, shippingClass);
-        // await swell.init(swellConfig.storeId, swellConfig.publicKey);
-        // const response = await swell.cart.update({
-        //   shipping: shipping,
-        // });
-        if (!response.success) {
-          throw new Error(`Invalid response: ${response.status}`);
+        if (cart.meta_data.length > 0) {
+          const find = cart.meta_data.find(
+            (item) => item.value === shippingClass.value
+          );
+          if (find) {
+            router.push({ pathname: `/checkout/payment`, query: { orderId } });
+          } else {
+            const response = await addShippingClassToOrder(
+              orderId,
+              shippingClass
+            );
+            // await swell.init(swellConfig.storeId, swellConfig.publicKey);
+            // const response = await swell.cart.update({
+            //   shipping: shipping,
+            // });
+            if (!response.success) {
+              throw new Error(`Invalid response: ${response.status}`);
+            }
+            setCart(response.data);
+            router.push({ pathname: `/checkout/payment`, query: { orderId } });
+          }
+        } else {
+          const response = await addShippingClassToOrder(
+            orderId,
+            shippingClass
+          );
+          // await swell.init(swellConfig.storeId, swellConfig.publicKey);
+          // const response = await swell.cart.update({
+          //   shipping: shipping,
+          // });
+          if (!response.success) {
+            throw new Error(`Invalid response: ${response.status}`);
+          }
+          setCart(response.data);
+          router.push({ pathname: `/checkout/payment`, query: { orderId } });
         }
-        setCart(response.data);
-        router.push({ pathname: `/checkout/payment`, query: { orderId } });
       } catch (err) {
         console.error(err);
         alert(

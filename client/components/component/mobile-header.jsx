@@ -15,8 +15,9 @@ import { ChevronRightIcon } from "../icons/chevronRightIcon";
 import { MenuIcon } from "../icons/menuIcon";
 import { ShoppingCartIcon } from "../icons/shoppingCartIcon";
 import { menuItems } from "@/data/navigation/desktop/menuItems";
+import { Badge } from "../ui/badge";
 
-export function MobileHeader({ dialogRef }) {
+export function MobileHeader({ dialogRef, cartQuantity }) {
   return (
     <Sheet key="1">
       <div className="w-full flex items-center justify-end gap-4 lg:hidden">
@@ -44,6 +45,10 @@ export function MobileHeader({ dialogRef }) {
           <Button className="lg:hidden" size="icon" variant="outline">
             <ShoppingCartIcon className="h-6 w-6" />
             <span className="sr-only">Open shopping cart</span>
+
+            <Badge className="absolute top-0 right-0 transform  -translate-y-1 h-5 w-5 text-xs flex items-center justify-center rounded-full bg-cdiBlue text-white">
+              {cartQuantity}
+            </Badge>
           </Button>
         </div>
         <div className="grid gap-2 py-6">

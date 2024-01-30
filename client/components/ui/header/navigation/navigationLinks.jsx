@@ -3,7 +3,7 @@ import { useCart } from "@/lib/hooks/useCart";
 import Link from "next/link";
 import { Button } from "../../button";
 import { CartSidebar } from "@/components/component/cart-sidebar";
-import { useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   NavigationMenuLink,
   NavigationMenuItem,
@@ -16,8 +16,13 @@ import {
 import SearchBox from "../../searchBox/searchBox";
 import { MobileHeader } from "@/components/component/mobile-header";
 import { ShoppingCartIcon } from "@/components/icons/shoppingCartIcon";
+import { Badge } from "../../badge";
+import { CartContext } from "@/lib/context/cartContext";
 
 const NavigationLinks = () => {
+  const { cart } = useContext(CartContext);
+  const [cartQuantity, setCartQuantity] = useState(0);
+  console.log(cart);
   const dialogRef = useRef();
   const handleDialog = () => {
     if (dialogRef.current.open) {
@@ -26,9 +31,22 @@ const NavigationLinks = () => {
       dialogRef.current.showModal();
     }
   };
+
+  useEffect(() => {
+    if (cart) {
+      if (cart.line_items.length > 0) {
+        let total = 0;
+        cart.line_items.forEach((item) => {
+          total += item.quantity;
+        });
+        setCartQuantity(total);
+      }
+    }
+  }, [cart]);
+
   return (
     <div className="w-full flex items-center justify-center ">
-      <MobileHeader dialogRef={dialogRef} />
+      <MobileHeader dialogRef={dialogRef} cartQuantity={cartQuantity} />
       <NavigationMenu className="hidden lg:flex lg:justify-between lg:items-center lg:w-full  [&>div]:w-full">
         <NavigationMenuList className="w-full ">
           {/* <ul className="flex w-full space-x-4 items-center justify-between"> */}
@@ -73,6 +91,11 @@ const NavigationLinks = () => {
               onClick={handleDialog}
             >
               <ShoppingCartIcon className="w-6 h-6 text-gray-600 hover:text-blue-600 transition-colors duration-200" />
+              {!cart ? null : !cart.line_items.length ? null : (
+                <Badge className="absolute top-0 right-0 transform  -translate-y-1 h-5 w-5 text-xs flex items-center justify-center rounded-full bg-cdiBlue text-white">
+                  {cartQuantity}
+                </Badge>
+              )}
             </Button>
           </NavigationMenuItem>
         </NavigationMenuList>

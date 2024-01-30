@@ -40,7 +40,7 @@ const Page = () => {
         <link rel="canonical" href="/" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content="NOINDEX, NOINDEX" />
       </Head>
       <Layout>
         <DesignedForSailors />

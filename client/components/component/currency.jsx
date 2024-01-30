@@ -9,39 +9,22 @@ import {
   SelectContent,
   Select,
 } from "@/components/ui/select";
-import { CartContext } from "@/lib/context/cartContext";
-import { useContext } from "react";
 
-export function Currency() {
-  const { cart } = useContext(CartContext);
-  const handleCurrencyUpdate = (e) => {
-    if (e.target.value) {
-      const id = e.target.value.toUpperCase();
-      localStorage.setItem("currency", id);
-      try {
-        fetch(`/api/wc/store/currency/${id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
+export function Currency({ setCurrencyCode }) {
   return (
-    <form onChange={handleCurrencyUpdate}>
-      <Select className="bg-white rounded-md shadow-md">
-        <SelectTrigger className="w-32 text-black bg-white">
+    <form>
+      <Select
+        className="bg-white rounded-md shadow-md"
+        onValueChange={(value) => setCurrencyCode(value)}
+      >
+        <SelectTrigger className="w-full text-black bg-white">
           <SelectValue placeholder="Currency" />
         </SelectTrigger>
-        <SelectContent className="bg-white rounded-md shadow-md">
-          <SelectItem value="usd">USD</SelectItem>
-          <SelectItem value="cad">CAD</SelectItem>
-          <SelectItem value="eur">EUR</SelectItem>
-          <SelectItem value="gbp">GBP</SelectItem>
-          <SelectItem value="jpy">JPY</SelectItem>
+        <SelectContent className="bg-white rounded-md shadow-md z-">
+          <SelectItem value="CAD">CAD</SelectItem>
+          <SelectItem value="USD">USD</SelectItem>
+          <SelectItem value="EUR">EUR</SelectItem>
+          <SelectItem value="GBP">GBP</SelectItem>
         </SelectContent>
       </Select>
     </form>

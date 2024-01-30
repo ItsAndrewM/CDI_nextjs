@@ -31,8 +31,6 @@ export function BlogPostLayout({ posts }) {
     }
   }, [posts]);
 
-  console.log(imagesArr);
-
   return (
     <div key="1" className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       {/* Most recent post */}
@@ -196,7 +194,7 @@ export function BlogPostLayout({ posts }) {
         <div className="flex flex-col gap-6 mt-6 w-full">
           {posts.slice(4).map((post, index) => {
             return (
-              <div className="flex flex-col md:flex-row w-full">
+              <div className="flex flex-col md:flex-row w-full" key={post.id}>
                 <Image
                   alt={
                     !imagesArr[index] ? "Post image" : imagesArr[index].alt_text

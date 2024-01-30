@@ -5,17 +5,19 @@
 import { Country, State, City } from "country-state-city";
 import { Button } from "@/components/ui/button";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { addShippingToOrder } from "@/lib/operations/operations-woocommerce";
 import { CartContext } from "@/lib/context/cartContext";
 import { useRouter } from "next/router";
 import CartCheckoutTotal from "./cart-checkout-total";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import PayPalButton from "../ui/payments/paypalButton/paypalButton";
+import { Currency } from "./currency";
 
 export function PaymentsPage() {
   const { orderId, cart, setCart, setOrderId } = useContext(CartContext);
   const router = useRouter();
+  const [currencyCode, setCurrencyCode] = useState("USD");
   const [countryCode, setCountryCode] = useState(null);
 
   const handleShippingSubmit = async (e) => {
@@ -54,6 +56,7 @@ export function PaymentsPage() {
       setErrors(validationMessages);
     }
   };
+
   return (
     <div className="mx-auto max-w-3xl space-y-6 border-2 border-gray-200 shadow-lg p-4 rounded-md my-8">
       <div className="lg:grid lg:grid-cols-2 gap-4 flex flex-col ">
@@ -191,19 +194,24 @@ export function PaymentsPage() {
               </div>
             </CardContent>
           </Card>
-          {/* <Button className="w-full" type="submit">
-            Accept Shipping
-          </Button> */}
         </form>
         <div className="flex flex-col gap-4">
           <CartCheckoutTotal cart={!cart ? null : cart} />
+          {/* <p className="text-sm text-gray-500  mb-2">
+            Prices are in CAD. The currency selected is what you'll be charged
+            in.
+          </p>
+          <Currency setCurrencyCode={setCurrencyCode} /> */}
           {!cart ? null : (
-            <PayPalButton
-              cart={cart}
-              id={orderId}
-              setCart={setCart}
-              setOrderId={setOrderId}
-            />
+            <div className="[&>*]:relative [&>*]:z-0">
+              <PayPalButton
+                cart={cart}
+                id={orderId}
+                setCart={setCart}
+                setOrderId={setOrderId}
+                currencyCode={currencyCode}
+              />
+            </div>
           )}
         </div>
       </div>

@@ -7,23 +7,12 @@ import { getPostImage } from "@/lib/operations/operations-woocommerce";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export function BlogPostPageLayout({ post }) {
-  const [image, setImage] = useState(null);
+export function BlogPostPageLayout({ post, image }) {
   const dateOptions = {
     year: "numeric",
     month: "long",
     day: "numeric",
   };
-
-  useEffect(() => {
-    const fetchPostImage = async () => {
-      const image = await getPostImage(post._links["wp:featuredmedia"][0].href);
-      setImage(image);
-    };
-    if (post) {
-      fetchPostImage();
-    }
-  }, [post]);
 
   return (
     <div className="flex flex-col min-h-screen">

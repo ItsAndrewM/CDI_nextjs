@@ -142,15 +142,15 @@ export const menuItems = [
     submenu: [
       {
         title: "Mainsail Furlers",
-        url: "/product-information/mainsail-furlers",
+        url: "/product-information?category=mainsail-furlers",
       },
       {
         title: "Flexible Furlers",
-        url: "/product-information/flexible-furlers",
+        url: "/product-information?category=flexible-furlers",
       },
       {
         title: "Install Help",
-        url: "/product-information/install-help",
+        url: "/product-information?category=install-help",
       },
     ],
   },

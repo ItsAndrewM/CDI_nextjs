@@ -75,8 +75,7 @@ function PrintLoadingState() {
   return <div>Current status: {status}</div>;
 }
 
-const PayPalButton = ({ cart, id, setCart, setOrderId }) => {
-  const [checkoutId, setCheckoutId] = useState(id);
+const PayPalButton = ({ cart, id, setCart, setOrderId, currencyCode }) => {
   const router = useRouter();
 
   const wooCreatePayment = async (order_id, paypal_order_id) => {
@@ -127,7 +126,7 @@ const PayPalButton = ({ cart, id, setCart, setOrderId }) => {
             cart: cart.line_items,
             user_id: cart.id,
             order_price: cart.total,
-            currency: cart.currency,
+            currency: currencyCode,
           }),
         }
       )

@@ -11,6 +11,7 @@ import { SITE_DESCRIPTION } from "@/lib/helpers";
 import usePagination from "@/lib/hooks/usePagination";
 import { ProductLayout } from "@/components/component/product-layout";
 import Head from "next/head";
+import { SkeletonProductLayout } from "@/components/component/skeleton-product-layout";
 
 export const getServerSideProps = async (context) => {
   const products = await getProducts(context.query);
@@ -28,6 +29,14 @@ export const getServerSideProps = async (context) => {
 };
 
 const Page = ({ products, pagesTotal, categoriesWithChildren }) => {
+  if (!products || !pagesTotal || !categoriesWithChildren) {
+    return (
+      <Layout>
+        <SkeletonProductLayout />
+      </Layout>
+    );
+  }
+
   const product_page_title = "CDI Furlers | Products";
   const router = useRouter();
   const [pages, setPages] = useState([1]);

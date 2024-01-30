@@ -15,7 +15,6 @@ import { getPosts } from "@/lib/operations/operations-woocommerce";
 import Head from "next/head";
 
 const Page = ({ posts, total_pages }) => {
-  console.log(posts);
   return (
     <>
       <Head>
