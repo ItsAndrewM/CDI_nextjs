@@ -1,7 +1,7 @@
 import {
   getCategoryPaths,
   getPostPaths,
-  getProductPath,
+  getProductPaths,
 } from "@/lib/operations/operations-woocommerce";
 
 const EXTERNAL_DATA_URL = "https://www.cdifurlers.com";
@@ -78,7 +78,7 @@ const SiteMap = () => {};
 export default SiteMap;
 
 export async function getServerSideProps({ res }) {
-  const products = await getProductPath();
+  const products = await getProductPaths();
   const collections = await getCategoryPaths();
   const posts = await getPostPaths();
   const sitemap = generateSiteMap(collections, products, posts);
