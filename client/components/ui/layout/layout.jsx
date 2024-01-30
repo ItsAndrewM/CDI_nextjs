@@ -33,22 +33,22 @@ const Layout = ({ children }) => {
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
-        <div className="google-analytics-container">
-          {/* <!-- Google tag (gtag.js) --> */}
-          <Script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-7KBK61N96M"
-          />
-          <Script id="google-analytics">
-            {`
+      </Head>
+      <div className="google-analytics-container">
+        {/* <!-- Google tag (gtag.js) --> */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-7KBK61N96M"
+        />
+        <Script id="google-analytics">
+          {`
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
                 
                   gtag('config', 'G-7KBK61N96M');`}
-          </Script>
-        </div>
-      </Head>
+        </Script>
+      </div>
       <Header />
       <main className="max-w-screen-3xl ">{children}</main>
       <Footer />
