@@ -1,11 +1,12 @@
 import {
   getCategoryPaths,
+  getPostPaths,
   getProductPath,
 } from "@/lib/operations/operations-woocommerce";
 
 const EXTERNAL_DATA_URL = "https://www.cdifurlers.com";
 
-const generateSiteMap = (collections, products) => {
+const generateSiteMap = (collections, products, posts) => {
   return `<?xml version="1.0" encoding="UTF-8"?>
     <urlset
           xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -15,6 +16,19 @@ const generateSiteMap = (collections, products) => {
                     <url>
                     <loc>${EXTERNAL_DATA_URL}/product-category</loc>
                     </url>
+                    <url>
+                    <loc>${EXTERNAL_DATA_URL}/product-information</loc>
+                    </url>
+                    ${posts.map((post) => {
+                      return `
+                            <url>
+                            <loc>${`${EXTERNAL_DATA_URL}/product-information/${post.slug}`}</loc>
+                            <lastmod>${new Date()
+                              .toISOString()
+                              .slice(0, 10)}</lastmod>
+                            </url>
+                        `;
+                    })}
                     <url>
                     <loc>${EXTERNAL_DATA_URL}/contact-us</loc>
                     </url>
@@ -66,7 +80,8 @@ export default SiteMap;
 export async function getServerSideProps({ res }) {
   const products = await getProductPath();
   const collections = await getCategoryPaths();
-  const sitemap = generateSiteMap(collections, products);
+  const posts = await getPostPaths();
+  const sitemap = generateSiteMap(collections, products, posts);
 
   res.setHeader("Cache-Control", "s-maxage=30, stale-while-revalidate");
   res.setHeader("Content-Type", "text/xml");

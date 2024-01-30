@@ -11,8 +11,29 @@ import {
 import { Input } from "@/components/ui/input";
 import { SearchButtonIcon } from "../icons/searchButtonIcon";
 import { PanelTopCloseIcon } from "../icons/panelTopCloseIcon";
+import { useRouter } from "next/router";
 
 export function SearchIcon() {
+  const router = useRouter();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Array.from(formData.keys()).reduce((acc, key) => {
+      acc[key] = formData.get(key);
+      return acc;
+    }, {});
+    if (data.search !== "") {
+      console.log(data);
+      router.push({
+        pathname: "/products",
+        query: {
+          search: data.search,
+        },
+      });
+    }
+  };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -21,16 +42,24 @@ export function SearchIcon() {
           <span className="sr-only">Toggle search bar</span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="start" className="w-full max-w-sm" side="left">
-        <div className="flex w-full max-w-sm items-center space-x-2">
-          <Input placeholder="Search" type="search" />
+      <PopoverContent align="start" className="w-full max-w-sm" side="bottom">
+        <form
+          className="flex w-full max-w-sm items-center space-x-2"
+          onSubmit={handleSearch}
+        >
+          <Input
+            placeholder="Search"
+            name="search"
+            type="search"
+            onKeyDown={(e) => (e.key === "Enter" ? handleSearch : "")}
+          />
           <div>
             <Button size="icon" variant="outline">
               <PanelTopCloseIcon className="h-4 w-4" />
               <span className="sr-only">Close search bar</span>
             </Button>
           </div>
-        </div>
+        </form>
       </PopoverContent>
     </Popover>
   );
